@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<h:head id="settingsPage">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Modifier Profile</title>
+	<!-- Bootstrap Core CSS -->
+	<link
+		href="/ManagementNotesEntryWebClient/template/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<!-- Custom CSS -->
+	<link href="/ManagementNotesEntryWebClient/template/css/sb-admin.css"
+		rel="stylesheet" />
+	<!-- Custom Fonts -->
+	<link
+		href="/ManagementNotesEntryWebClient/template/font-awesome/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css" />
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</h:head>
+<body>
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="admin.jsf"><i
+					class="fa fa-user-md"></i> Administration</a>
+			</div>
+			<!-- Top Menu Items -->
+			<h:form>
+				<ul class="nav navbar-right top-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><i class="fa fa-user"></i> <h:outputText
+								value="#{userBean.nameUser}" /> <h:outputText value=" " /> <h:outputText
+								value="#{userBean.lastNameUser}" /> <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="profile.jsf"><i class="fa fa-fw fa-user"></i>
+									Profile</a></li>
+							<li class="active"><a href="settings.jsf"><i
+									class="fa fa-fw fa-gear"></i> Settings</a></li>
+							<li class="divider"></li>
+							<li><h:commandLink id="connexion" type="submit"
+									action="#{loginController.logout}">
+									<i class="fa fa-fw fa-power-off"></i>Log Out</h:commandLink></li>
+						</ul></li>
+				</ul>
+			</h:form>
+			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav side-nav">
+					<li><a href="verif_notes.jsf"><i
+							class="fa fa-pencil-square-o"></i> Vérification des notes</a></li>
+					<li><a href="gestion_compostage.jsf"><i
+							class="fa fa-paperclip"></i> Gestion de compostage</a></li>
+					<li><a href="javascript:;" data-toggle="collapse"
+						data-target="#demo"><i class="fa fa-th-list"></i> Parametres <i
+							class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="demo" class="collapse">
+							<li><a href="administrateurs.jsf"><i
+									class="fa fa-wrench"></i> Administrateurs</a></li>
+							<li><a href="enseignants.jsf"><i class="fa fa-wrench"></i>
+									Enseignants</a></li>
+							<li><a href="etudiants.jsf"><i class="fa fa-wrench"></i>
+									Etudiants</a></li>
+							<li><a href="matieres.jsf"><i class="fa fa-wrench"></i>
+									Matiéres</a></li>
+							<li><a href="departements.jsf"><i class="fa fa-wrench"></i>
+									Departements</a></li>
+							<li><a href="formations.jsf"><i class="fa fa-wrench"></i>
+									Formations</a></li>
+							<li><a href="niveaux.jsf"><i class="fa fa-wrench"></i>
+									Niveaux</a></li>
+							<li><a href="cours.jsf"><i class="fa fa-wrench"></i>
+									Cours</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<h2>
+						Profile administrateur :
+						<h:outputText
+							value="#{userBean.nameUser} #{userBean.lastNameUser}" />
+					</h2>
+					<div class="well">
+						<h:form role="form">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Nom :</label>
+									<h:inputText id="name" value="#{userBean.nameUser}"
+										styleClass="form-control" placeholder="Entrer le nom"></h:inputText>
+								</div>
+								<div class="form-group">
+									<label>Prénom :</label>
+									<h:inputText id="lastName" value="#{userBean.lastNameUser}"
+										styleClass="form-control" placeholder="Entrer le prénom"></h:inputText>
+								</div>
+								<div class="form-group">
+									<label>Email :</label>
+									<h:inputText id="email" value="#{userBean.emailUser}"
+										styleClass="form-control" placeholder="Entrer le mail"></h:inputText>
+								</div>
+								<div class="form-group">
+									<label>Login :</label>
+									<h:inputText id="userName" value="#{userBean.userNameUser}"
+										styleClass="form-control" placeholder="Entrer le login"
+										required="true" requiredMessage="SVP Entrer le login"></h:inputText>
+									<h:message for="userName" errorClass="errorMessage"
+										errorStyle="color:red" />
+								</div>
+								<div class="form-group">
+									<label>Mot de passe :</label>
+									<h:inputText id="password" value="#{userBean.passwordUser}"
+										styleClass="form-control" placeholder="Entrer le mot de passe"
+										required="true" requiredMessage="SVP Entrer le mot de passe"></h:inputText>
+									<h:message for="password" errorClass="errorMessage"
+										errorStyle="color:red" />
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Poste :</label>
+									<h:inputText id="poste" value="#{userBean.posteAdminUser}"
+										styleClass="form-control" placeholder="Entrer la poste"></h:inputText>
+								</div>
+								<div class="form-group">
+									<label for="disabledSelect">Créé le : </label>
+									<rich:calendar value="#{userBean.createdAtUser}"
+										styleClass="form-control" locale="fr/FR" popup="true"
+										datePattern="d/M/yy HH:mm" showApplyButton="false"
+										cellWidth="24px" cellHeight="22px" style="width:100%"
+										disabled="true" />
+								</div>
+								<div class="form-group">
+									<label for="disabledSelect">Modifié le : </label>
+									<rich:calendar value="#{userBean.updatedAtUser}"
+										styleClass="form-control" locale="fr/FR" popup="true"
+										datePattern="d/M/yy HH:mm" showApplyButton="false"
+										cellWidth="24px" cellHeight="22px" style="width:100%"
+										disabled="true" />
+								</div>
+								<div class="form-group">
+									<label>Enabled : </label> <label class="form-control">
+										<h:selectBooleanCheckbox value="#{userBean2.rememberMe}"
+											disabled="true" /> <h:outputText id="Enabled"
+											value="#{userBean2.rememberMeYesNo}"></h:outputText>
+									</label>
+								</div>
+								<div class="form-group">
+									<br />
+									<h:commandButton value="Modifier"
+										action="#{userBean.modifierUser}"
+										styleClass="btn btn-lg btn-default" style="width:100%"></h:commandButton>
+								</div>
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-lg btn-default"
+									onclick="window.location.href='profile.jsf'"
+									style="width: 100%">Profile</button>
+							</div>
+							<h:messages styleClass="errorMessage" errorStyle="color:red" />
+						</h:form>
+
+					</div>
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /#page-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+	<!-- jQuery -->
+	<script src="/ManagementNotesEntryWebClient/template/js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="/ManagementNotesEntryWebClient/template/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

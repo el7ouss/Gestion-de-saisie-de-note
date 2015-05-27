@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<h:head id="loginPage">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Gestion de saisie de niveaus - Login Page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/ManagementNotesEntryWebClient/template/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Custom CSS -->
+    <link href="/ManagementNotesEntryWebClient/template/css/sb-admin.css" rel="stylesheet"/>
+    <!-- Custom Fonts -->
+    <link href="/ManagementNotesEntryWebClient/template/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</h:head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h:form id="loginFormId" prependId="false">
+                            <fieldset>
+                                <div class="form-group">
+                                	<h:outputLabel for="j_password" value="Login: * " />
+                                	<h:inputText id="j_username" required="true" value="#{userBean.userNameUser}" label="user_name" styleClass="form-control" autocomplete="on"/>  
+			    					<h:message for="j_username" display="text" style="color:red"/>
+                                </div>
+								<div class="form-group">
+									<h:outputLabel for="j_password" value="Password: * " />
+									<h:inputSecret id="j_password" label="password" value="#{userBean.passwordUser}" required="true" styleClass="form-control"/>
+									<h:message for="j_password" display="text" style="color:red" />									
+								</div>
+								<div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me" />Remember Me
+                                    </label>
+                                </div>
+                                <h:commandButton id="btnLoginId" type="submit" action="#{loginController.doLogin}" value="Login" styleClass="btn btn-lg btn-default" style="width: 100%"/>
+                                <!-- Change this to a button or input when using this as a form -->
+                               <!--  <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>-->
+                            </fieldset>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="/ManagementNotesEntryWebClient/template/js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/ManagementNotesEntryWebClient/template/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/ManagementNotesEntryWebClient/template/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/ManagementNotesEntryWebClient/template/js/sb-admin-2.js"></script>
+</body>
+</html>

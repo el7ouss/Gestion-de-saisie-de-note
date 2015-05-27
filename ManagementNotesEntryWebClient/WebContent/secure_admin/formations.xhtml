@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<h:head id="formationsPage">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Gestion des Formations</title>
+	<!-- Bootstrap Core CSS -->
+	<link
+		href="/ManagementNotesEntryWebClient/template/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<!-- Custom CSS -->
+	<link href="/ManagementNotesEntryWebClient/template/css/sb-admin.css"
+		rel="stylesheet" />
+	<!-- Custom Fonts -->
+	<link
+		href="/ManagementNotesEntryWebClient/template/font-awesome/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css" />
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</h:head>
+<body>
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="admin.jsf"><i
+					class="fa fa-user-md"></i> Administration</a>
+			</div>
+			<!-- Top Menu Items -->
+			<h:form>
+				<ul class="nav navbar-right top-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><i class="fa fa-user"></i> <h:outputText
+								value="#{userBean.nameUser} #{userBean.lastNameUser}" /> <b
+							class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="profile.jsf"><i class="fa fa-fw fa-user"></i>
+									Profile</a></li>
+							<li><a href="settings.jsf"><i class="fa fa-fw fa-gear"></i>
+									Settings</a></li>
+							<li class="divider"></li>
+							<li><h:commandLink id="connexion" type="submit"
+									action="#{loginController.logout}">
+									<i class="fa fa-fw fa-power-off"></i>Log Out</h:commandLink></li>
+						</ul></li>
+				</ul>
+			</h:form>
+			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav side-nav">
+					<li><a href="verif_notes.jsf"><i
+							class="fa fa-pencil-square-o"></i> Vérification des notes</a></li>
+					<li><a href="gestion_compostage.jsf"><i
+							class="fa fa-paperclip"></i> Gestion de compostage</a></li>
+					<li class="active"><a href="javascript:;"
+						data-toggle="collapse" data-target="#demo"><i
+							class="fa fa-th-list"></i> Parametres <i
+							class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="demo" class="collapse">
+							<li><a href="administrateurs.jsf"><i
+									class="fa fa-wrench"></i> Administrateurs</a></li>
+							<li><a href="enseignants.jsf"><i class="fa fa-wrench"></i>
+									Enseignants</a></li>
+							<li><a href="etudiants.jsf"><i class="fa fa-wrench"></i>
+									Etudiants</a></li>
+							<li><a href="matieres.jsf"><i class="fa fa-wrench"></i>
+									Matiéres</a></li>
+							<li><a href="departements.jsf"><i class="fa fa-wrench"></i>
+									Departements</a></li>
+							<li class="active"><a href="formations.jsf"><i
+									class="fa fa-wrench"></i> Formations</a></li>
+							<li><a href="niveaux.jsf"><i class="fa fa-wrench"></i>
+									Niveaux</a></li>
+							<li><a href="cours.jsf"><i class="fa fa-wrench"></i>
+									Cours</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<h2>Ajouter une formation :</h2>
+					<div class="well">
+						<div class="row">
+							<h:form role="form">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Designation :</label>
+										<h:inputText id="name"
+											value="#{formationsBean.designationFormation}"
+											required="true" styleClass="form-control"
+											placeholder="Entrer la designation"></h:inputText>
+									</div>
+									<div class="form-group">
+										<label>Description :</label>
+										<h:inputText id="lastName"
+											value="#{formationsBean.descriptionFormation}"
+											styleClass="form-control" placeholder="Entrer la description"></h:inputText>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Département : </label>
+										<button type="button"
+											onclick="window.location.href='departements.jsf'"
+											class="btn btn-xs btn-link">Ajouter</button>
+										<h:selectOneMenu value="#{formationsBean.idDepartement}"
+											class="form-control">
+											<f:selectItem itemValue="0"
+												itemLabel="Pas de departement sélectionné ..." />
+											<f:selectItems
+												value="#{departementsBean.departementDTOArray}"
+												var="departement" itemLabel="#{departement.designation}"
+												itemValue="#{departement.id}" />
+										</h:selectOneMenu>
+									</div>
+									<div class="form-group">
+										<br />
+										<h:commandButton value="Ajouter"
+											action="#{formationsBean.ajoutFormation}"
+											styleClass="btn btn-lg btn-default" style="width:100%"></h:commandButton>
+									</div>
+								</div>
+								<h:messages styleClass="errorMessage" errorStyle="color:red" />
+							</h:form>
+						</div>
+					</div>
+				</div>
+				<!-- /.row -->
+				<div class="row">
+					<h2>Liste des formations :</h2>
+					<h:form>
+						<div class="table-responsive">
+							<rich:dataTable value="#{formationsBean.formationDTOArray}"
+								var="formation" id="table"
+								styleClass="table table-bordered table-hover table-striped">
+								<rich:column sortBy="#{formation.designation}">
+									<!-- sortOrder="ascending" -->
+									<f:facet name="header">Designation
+									<!--a4j:commandLink value="Designation" render="table"/-->
+									</f:facet>
+									<h:outputText id="designationTable"
+										value="#{formation.designation}"></h:outputText>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Description</f:facet>
+									<h:outputText id="descriptionTable"
+										value="#{formation.description}"></h:outputText>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Departement</f:facet>
+									<h:commandLink id="departementTable"
+										value="#{formation.departementDto.designation}"
+										action="settingdepartement" styleClass="btn btn-xs btn-link">
+										<f:setPropertyActionListener
+											target="#{departementsBean.idDepartement}"
+											value="#{formation.departementDto.id}" />
+										<f:setPropertyActionListener
+											target="#{departementsBean.designationDepartement}"
+											value="#{formation.departementDto.designation}" />
+										<f:setPropertyActionListener
+											target="#{departementsBean.descriptionDepartement}"
+											value="#{formation.departementDto.description}" />
+										<f:setPropertyActionListener
+											target="#{departementsBean.enabledDepartement}"
+											value="#{formation.departementDto.enabled}" />
+										<f:setPropertyActionListener
+											target="#{departementsBean.createdAtStringDepartement}"
+											value="#{formation.departementDto.createdAtString}" />
+										<f:setPropertyActionListener
+											target="#{departementsBean.updatedAtStringDepartement}"
+											value="#{formation.departementDto.updatedAtString}" />
+									</h:commandLink>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Enabled</f:facet>
+									<h:selectManyCheckbox id="enabledTable"
+										value="#{formationsBean.selectedEnabledFormation}">
+										<f:selectItem itemValue="#{formation.id}"
+											itemLabel="#{formation.enabled}" />
+									</h:selectManyCheckbox>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Créé le</f:facet>
+									<h:outputText id="createdAtTable"
+										value="#{formation.createdAtString}"></h:outputText>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Modifié le</f:facet>
+									<h:outputText id="updatedAtTable"
+										value="#{formation.updatedAtString}"></h:outputText>
+								</rich:column>
+								<rich:column>
+									<f:facet name="header">Action</f:facet>
+									<h:commandLink value="Modifier" action="settingformation"
+										styleClass="btn btn-xs btn-link">
+										<f:setPropertyActionListener
+											target="#{formationsBean.idFormation}"
+											value="#{formation.id}" />
+										<f:setPropertyActionListener
+											target="#{formationsBean.designationFormation}"
+											value="#{formation.designation}" />
+										<f:setPropertyActionListener
+											target="#{formationsBean.descriptionFormation}"
+											value="#{formation.description}" />
+										<f:setPropertyActionListener
+											target="#{formationsBean.idDepartement}"
+											value="#{formation.departementDto.id}" />
+										<f:setPropertyActionListener
+											target="#{formationsBean.enabledFormation}"
+											value="#{formation.enabled}" />
+										<f:setPropertyActionListener
+											target="#{formationsBean.createdAtStringFormation}"
+											value="#{formation.createdAtString}" />
+										<f:setPropertyActionListener
+											target="#{formationsBean.updatedAtStringFormation}"
+											value="#{formation.updatedAtString}" />
+									</h:commandLink>
+								</rich:column>
+							</rich:dataTable>
+						</div>
+					</h:form>
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /#page-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+	<!-- jQuery -->
+	<script src="/ManagementNotesEntryWebClient/template/js/jquery.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="/ManagementNotesEntryWebClient/template/js/bootstrap.min.js"></script>
+</body>
+</html>

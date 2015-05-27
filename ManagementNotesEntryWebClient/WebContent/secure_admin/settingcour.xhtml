@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+<h:head id="settingcourPage">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Modifier Cour</title>
+	<!-- Bootstrap Core CSS -->
+	<link
+		href="/ManagementNotesEntryWebClient/template/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<!-- Custom CSS -->
+	<link href="/ManagementNotesEntryWebClient/template/css/sb-admin.css"
+		rel="stylesheet" />
+	<!-- Custom Fonts -->
+	<link
+		href="/ManagementNotesEntryWebClient/template/font-awesome/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css" />
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</h:head>
+<body>
+	<div id="wrapper">
+		<!-- Navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="admin.jsf"><i
+					class="fa fa-user-md"></i> Administration</a>
+			</div>
+			<!-- Top Menu Items -->
+			<h:form>
+				<ul class="nav navbar-right top-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown"><i class="fa fa-user"></i> <h:outputText
+								value="#{userBean.nameUser} #{userBean.lastNameUser}" /> <b
+							class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="profile.jsf"><i class="fa fa-fw fa-user"></i>
+									Profile</a></li>
+							<li class="active"><a href="settings.jsf"><i
+									class="fa fa-fw fa-gear"></i> Settings</a></li>
+							<li class="divider"></li>
+							<li><h:commandLink id="connexion" type="submit"
+									action="#{loginController.logout}">
+									<i class="fa fa-fw fa-power-off"></i>Log Out</h:commandLink></li>
+						</ul></li>
+				</ul>
+			</h:form>
+			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav side-nav">
+					<li><a href="verif_notes.jsf"><i
+							class="fa fa-pencil-square-o"></i> Vérification des notes</a></li>
+					<li><a href="gestion_compostage.jsf"><i
+							class="fa fa-paperclip"></i> Gestion de compostage</a></li>
+					<li><a href="javascript:;" data-toggle="collapse"
+						data-target="#demo"><i class="fa fa-th-list"></i> Parametres <i
+							class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="demo" class="collapse">
+							<li><a href="administrateurs.jsf"><i
+									class="fa fa-wrench"></i> Administrateurs</a></li>
+							<li><a href="enseignants.jsf"><i class="fa fa-wrench"></i>
+									Enseignants</a></li>
+							<li><a href="etudiants.jsf"><i class="fa fa-wrench"></i>
+									Etudiants</a></li>
+							<li><a href="matieres.jsf"><i class="fa fa-wrench"></i>
+									Matiéres</a></li>
+							<li><a href="departements.jsf"><i class="fa fa-wrench"></i>
+									Departements</a></li>
+							<li><a href="formations.jsf"><i class="fa fa-wrench"></i>
+									Formations</a></li>
+							<li><a href="niveaux.jsf"><i class="fa fa-wrench"></i>
+									Niveaux</a></li>
+							<li class="active"><a href="cours.jsf"><i
+									class="fa fa-wrench"></i> Cours</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+					<h2>
+						Cour :
+						<h:outputText
+							value="#{matieresBean.designationMatiere}, #{enseignantsBean.nameEns} #{enseignantsBean.lastNameEns}, #{niveauxBean.designationNiveau} #{formationsBean.designationFormation} : #{departementsBean.designationDepartement}" />
+					</h2>
+					<div class="well">
+						<h:form role="form">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Matiére : </label>
+									<button type="button"
+										onclick="window.location.href='matieres.jsf'"
+										class="btn btn-xs btn-link">Ajouter</button>
+									<h:selectOneMenu value="#{coursBean.idMatiere}"
+										class="form-control">
+										<f:selectItem itemValue="0"
+											itemLabel="Pas de matiere sélectionné ..." />
+										<f:selectItems value="#{matieresBean.matiereDTOArray}"
+											var="matiere" itemLabel="#{matiere.designation}"
+											itemValue="#{matiere.id}" />
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group">
+									<label>Enseignant : </label>
+									<button type="button"
+										onclick="window.location.href='enseignants.jsf'"
+										class="btn btn-xs btn-link">Ajouter</button>
+									<h:selectOneMenu value="#{coursBean.idEnseignant}"
+										class="form-control">
+										<f:selectItem itemValue="0"
+											itemLabel="Pas d'enseignant sélectionné ..." />
+										<f:selectItems value="#{enseignantsBean.ensDTOArray}"
+											var="enseignant" itemValue="#{enseignant.id}"
+											itemLabel="#{enseignant.lastName} #{enseignant.name}" />
+									</h:selectOneMenu>
+								</div>
+								<div class="form-group">
+									<label>Niveau : </label>
+									<button type="button"
+										onclick="window.location.href='niveaux.jsf'"
+										class="btn btn-xs btn-link">Ajouter</button>
+									<h:selectOneMenu value="#{coursBean.idNiveau}"
+										class="form-control">
+										<f:selectItem itemValue="0"
+											itemLabel="Pas de niveau sélectionné ..." />
+										<f:selectItems value="#{niveauxBean.niveauDTOArray}"
+											var="niveau"
+											itemLabel="#{niveau.designation} - #{niveau.formationDto.designation} - #{niveau.formationDto.departementDto.designation}"
+											itemValue="#{niveau.id}" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Année Universitaire :</label>
+									<h:inputText id="anneeUniversitaire"
+										value="#{coursBean.anneeUniversitaireCour}"
+										styleClass="form-control"
+										placeholder="Entrer l'année universitaire"></h:inputText>
+								</div>
+								<div class="form-group">
+									<label>Créé le : </label>
+									<rich:calendar value="#{coursBean.createdAtCour}"
+										styleClass="form-control" locale="fr/FR" popup="true"
+										datePattern="dd/MM/yyyy HH:mm:ss" showApplyButton="false"
+										cellWidth="24px" cellHeight="22px" style="width:100%"
+										disabled="true" />
+								</div>
+								<div class="form-group">
+									<label>Modifié le : </label>
+									<rich:calendar value="#{coursBean.updatedAtCour}"
+										styleClass="form-control" locale="fr/FR" popup="true"
+										datePattern="dd/MM/yyyy HH:mm:ss" showApplyButton="false"
+										cellWidth="24px" cellHeight="22px" style="width:100%"
+										disabled="true" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Enabled : </label> <label class="form-control"> <h:selectBooleanCheckbox
+										value="#{coursBean2.rememberMe}" disabled="true" /> <h:outputText
+										id="Enabled" value="#{coursBean2.rememberMeYesNo}"></h:outputText>
+								</label>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Notes de contrôle : </label> <label class="form-control">
+										<h:selectBooleanCheckbox value="#{coursBean.hasTP}"
+											valueChangeListener="#{coursBean.ifTPChanged}" />TP :
+										Coefficient : <h:inputText value="#{coursBean.coefficientTP}"
+											size="5"></h:inputText> Session : Principale
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="form-control"> <h:selectBooleanCheckbox
+											value="#{coursBean.hasTD}"
+											valueChangeListener="#{coursBean.ifTDChanged}" />TD :
+										Coefficient : <h:inputText value="#{coursBean.coefficientTD}"
+											size="5"></h:inputText> Session : Principale
+									</label>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label>Notes des devoirs : </label> <label class="form-control">
+										<h:selectBooleanCheckbox value="#{coursBean.hasExamP}"
+											valueChangeListener="#{coursBean.ifExamPChanged}" />Examen :
+										Coefficient : <h:inputText
+											value="#{coursBean.coefficientExamP}" size="5"></h:inputText>
+										Session : Principale
+									</label>
+								</div>
+								<div class="form-group">
+									<label class="form-control"> <h:selectBooleanCheckbox
+											value="#{coursBean.hasExamR}"
+											valueChangeListener="#{coursBean.ifExamRChanged}" />Examen :
+										Coefficient : <h:inputText
+											value="#{coursBean.coefficientExamR}" size="5"></h:inputText>
+										Session : Rattrappage
+									</label>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<h:commandButton value="Modifier"
+										action="#{coursBean.getEdited}"
+										styleClass="btn btn-lg btn-default" style="width:100%"></h:commandButton>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<button type="button" class="btn btn-lg btn-default"
+										onclick="window.location.href='cours.jsf'" style="width: 100%">Gestion
+										des Cours</button>
+								</div>
+							</div>
+							<h:messages styleClass="errorMessage" errorStyle="color:red" />
+						</h:form>
+					</div>
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- /#page-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+	<!-- jQuery -->
+	<script src="/ManagementNotesEntryWebClient/template/js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script
+		src="/ManagementNotesEntryWebClient/template/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
